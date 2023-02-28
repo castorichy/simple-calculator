@@ -1,5 +1,3 @@
-#!/bin/env bash
-
 import os
 from posix import system
 
