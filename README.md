@@ -12,8 +12,6 @@ You can install by cloning the project
 
 After Cloning open the `simple-calculator` direcory and run The program:
 ```python3 calc.py```
-or
-`./calc.py`
 
 # contibutions
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
