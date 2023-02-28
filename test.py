@@ -47,6 +47,7 @@ class Calculator:
 
 
 def createObject():
+    """Creating an object for Calculator class"""
     os.system('cls' if os.name == 'nt' else 'clear')
     strg = input("""\
 \tJust a simple Calculator
