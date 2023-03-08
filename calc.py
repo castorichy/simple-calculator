@@ -7,20 +7,22 @@ class Calculator:
     __op = [ "/", "*", "+", "-" ]
     __test = []
     __res = 0.0
-    def __init__(self, string: str) -> None:
+    def __init__(self) -> None:
         """Initializes the Atributes"""
         self.__op = Calculator.__op
         self.__test = Calculator.__test
         self.__res = Calculator.__res
-        self.__test = string.split(" ")
+        #self.__test = string.split(" ")
 
-    def calculate(self) -> float:
+    def calculate(self, string=[]) -> float:
         """Doese All the calculations necessary and return the results"""
+        self.__test = string
         for e in self.__op:
         # loops through op (operators)
             for j, f in enumerate(self.__test):
             # loops through test (values to work on -- test)
                 if e == f:
+                    print(e, f)
                     match f:
                         case "/":
                             self.__res = float(self.__test[j - 1]) / float(self.__test[j + 1])
@@ -45,8 +47,7 @@ class Calculator:
         self.__test.insert(j - 1, str(self.__res))
 
 
-
-def createObject():
+''' def createObject():
     """Creating an object for Calculator class"""
     os.system('cls' if os.name == 'nt' else 'clear')
     strg = input("""\
@@ -61,6 +62,6 @@ Example:
 1 + 2 - 3 * 4 / 3
 Also remember to seperate number and operator with one space in betwee
 \tEnter math operatoion
->>> """)
+>>> """)'''
 if __name__ == "__main__":
     createObject()

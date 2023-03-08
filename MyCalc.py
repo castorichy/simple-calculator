@@ -1,28 +1,33 @@
 from tkinter import *
-from calc import Calculator as calc
+from calc import Calculator
 
 root = Tk()
 root.title("Simple Calculator")
 root.geometry("225x400")
 root.config(bg="light yellow")
-
-ans = 0
-
-def onclick_equal(text: str):
+class SimpleCalculator(Calculator):
+    pass
+def onclick_equal(text: str, ans):
     operators = ["/", "x", "+", "-", "%"]
     num = ""
-
+    #print(text)
     for i in text:
         if i not in operators:
             num += i
         else:
             num += f" {i} "
-    print(num)
-    #return num
 
+    num_l = num.split(" ")
+    for i, n in enumerate(num_l):
+        if n == "ans":
+            num_l.remove("ans")
+            num_l.insert(i, ans)
 
+    print(num_l)
+    return num_l
 
 def onclick(text):
+    ans = ""
     match text:
         case "C":
             entry.delete(0, END)
@@ -66,10 +71,25 @@ def onclick(text):
         case ".":
             entry.insert(entry.index(INSERT) + 1, text)
         case "ans":
-            pass
+            entry.delete(0, END)
+            entry.insert(entry.index(INSERT) + 1, "ans")
         case "=":
+
             res = entry.get()
-            onclick_equal(res)
+            print("i am: ", ans)
+
+            operation = onclick_equal(res, ans)
+            print("Hello 1: ", operation)
+
+
+            # instance of calculator class
+            c = Calculator()
+            res_cal = str(c.calculate(operation))
+            ans = res_cal
+            print("Hello", ans)
+
+            entry.delete(0, END)
+            entry.insert(0, res_cal)
 
 
 
