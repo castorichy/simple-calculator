@@ -62,9 +62,5 @@ Example:
 Also remember to seperate number and operator with one space in betwee
 \tEnter math operatoion
 >>> """)
-    # Creating object
-    calc = Calculator(strg)
-    result = calc.calculate()
-    print("\nResult =", result)
-
-createObject()
+if __name__ == "__main__":
+    createObject()
