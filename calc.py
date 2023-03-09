@@ -4,7 +4,7 @@ from posix import system
 class Calculator:
     """Simple Calculator that calculates mixture of operations in one line
     Examole: 2 + 4 * 3 / 2 = 8"""
-    __op = [ "/", "*", "+", "-" ]
+    __op = [ "/", "*", "+", "-", "%" ]
     __test = []
     __res = 0.0
     def __init__(self) -> None:
@@ -36,6 +36,10 @@ class Calculator:
                         case "-":
                             self.__res = float(self.__test[j - 1]) - float(self.__test[j + 1])
                             self.__removes(j)
+                        case "%":
+                            self.__res = float(self.__test[j - 1]) % float(self.__test[j + 1])
+                            self.__removes(j)
+
         return self.__res
 
 
