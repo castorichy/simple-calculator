@@ -1,12 +1,11 @@
 from tkinter import *
-from calc import Calculator
 
 root = Tk()
 root.title("Simple Calculator")
-root.geometry("225x400")
+root.geometry("225x342")
 root.config(bg="light yellow")
-class SimpleCalculator(Calculator):
-    pass
+
+
 def onclick_equal(text: str, ans):
     operators = ["/", "x", "+", "-", "%"]
     num = ""
