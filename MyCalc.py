@@ -4,23 +4,39 @@ root = Tk()
 root.title("Simple Calculator")
 root.geometry("225x342")
 root.config(bg="light yellow")
+root.resizable(False,False)
 
-class CalculatorApp:
+class CalculatorApp(Calculator):
     """ Graphical user unterface App """
     ans_ret = ""
+    total_results = "0"
+
+    operators = ["/", "*", "+", "-", "%"]
 
     def __init__(self) -> None:
         self.ans_ret = CalculatorApp.ans_ret
 
+    def checkExceptions(self, check_list: list):
+        """ Dealing with Errors  """
+        if check_list[0] == "" or check_list[-1] in "":
+            print("Hello")
+            return -1
+        return 1
+
 
     def onclick_equal(self, text: str, ans):
-        operators = ["/", "*", "+", "-", "%"]
         num = ""
         #print(text)
         if len(text) == 1:
-            return text[1]
+            if text in self.operators:
+                entry.delete(0, END)
+                entry.insert(0, "Syntax Error")
+            else:
+                self.total_results = text
+                entry.delete(0, END)
+                entry.insert(0, text)
         for i in text:
-            if i not in operators:
+            if i not in self.operators:
                 num += i
             else:
                 num += f" {i} "
@@ -31,8 +47,11 @@ class CalculatorApp:
                 num_l.remove("ans")
                 num_l.insert(i, ans)
 
-        print("mul: ", num_l)
-        return num_l
+        if self.checkExceptions(num_l) < 0:
+            entry.delete(0, END)
+            entry.insert(0, "Syntax Error")
+        else:
+            return num_l
 
     def onclick(self, text):
         ans = ""
@@ -40,9 +59,7 @@ class CalculatorApp:
             case "C":
                 entry.delete(0, END)
             case "D":
-                entry.delete(1, END)
-                if len(entry.get()) == 1:
-                    entry.delete(0, END)
+                entry.delete(entry.index(INSERT) - 1, END)
             case "/":
                 entry.insert(entry.index(INSERT) + 1, text)
             case "%":
@@ -80,6 +97,8 @@ class CalculatorApp:
                 entry.insert(entry.index(INSERT) + 1, text)
             case "ans":
                 self.ans_ret = entry.get()
+                if self.ans_ret == "":
+                    self.ans_ret = self.total_results
                 entry.delete(0, END)
                 entry.insert(entry.index(INSERT) + 1, "ans")
             case "=":
@@ -87,20 +106,21 @@ class CalculatorApp:
                 res = entry.get()
                 print("i am: ", self.ans_ret)
 
+
                 operation = self.onclick_equal(res, self.ans_ret)
                 print("Hello 1: ", operation)
 
 
                 # instance of calculator class
-                c = Calculator()
-                res = str(c.calculate(operation))
+                results = str(self.calculate(operation))
                 res_cal=""
-                if res[-2: ] == ".0":
-                    for n in res:
+                if results[-2: ] == ".0":
+                    for n in results:
                         if n == ".":
                             break
                         else:
                             res_cal += n
+                self.total_results = res_cal
                 print(res_cal)
 
                 print("press: ", res_cal)
