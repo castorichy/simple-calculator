@@ -6,6 +6,13 @@ root.geometry("225x342")
 root.config(bg="light yellow")
 
 class CalculatorApp:
+    """ Graphical user unterface App """
+    ans_ret = ""
+
+    def __init__(self) -> None:
+        self.ans_ret = CalculatorApp.ans_ret
+
+
     def onclick_equal(self, text: str, ans):
         operators = ["/", "*", "+", "-", "%"]
         num = ""
@@ -72,14 +79,15 @@ class CalculatorApp:
             case ".":
                 entry.insert(entry.index(INSERT) + 1, text)
             case "ans":
+                self.ans_ret = entry.get()
                 entry.delete(0, END)
                 entry.insert(entry.index(INSERT) + 1, "ans")
             case "=":
 
                 res = entry.get()
-                print("i am: ", ans)
+                print("i am: ", self.ans_ret)
 
-                operation = self.onclick_equal(res, ans)
+                operation = self.onclick_equal(res, self.ans_ret)
                 print("Hello 1: ", operation)
 
 
@@ -120,7 +128,6 @@ entry = Entry(
     justify=RIGHT)
 #### POSITIONING ENTRY ####
 entry.index(INSERT)
-entry.insert(0, "0")
 entry.place(y=0, x=3)
 
 #### Buttons 1 to 9 ####

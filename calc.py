@@ -15,7 +15,8 @@ class Calculator:
         #self.__test = string.split(" ")
 
     def calculate(self, string=[]) -> float:
-        """Doese All the calculations necessary and return the results"""
+        """Doese All the calculations necessary and return the results
+        this part loops through the operators and uses BODMAS format to do calculations"""
         self.__test = string
         for e in self.__op:
         # loops through op (operators)
@@ -51,21 +52,5 @@ class Calculator:
         self.__test.insert(j - 1, str(self.__res))
 
 
-''' def createObject():
-    """Creating an object for Calculator class"""
-    os.system('cls' if os.name == 'nt' else 'clear')
-    strg = input("""\
-\tJust a simple Calculator
-Opertors to be used:
-    add = +
-    subtract = -
-    multiplication = *
-    Devision = /
-    Reminder = % not implimented
-Example:
-1 + 2 - 3 * 4 / 3
-Also remember to seperate number and operator with one space in betwee
-\tEnter math operatoion
->>> """)'''
 if __name__ == "__main__":
-    createObject()
+    Calculator()
