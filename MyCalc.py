@@ -85,7 +85,15 @@ class CalculatorApp:
 
                 # instance of calculator class
                 c = Calculator()
-                res_cal = str(c.calculate(operation)).strip(".0")
+                res = str(c.calculate(operation))
+                res_cal=""
+                if res[-2: ] == ".0":
+                    for n in res:
+                        if n == ".":
+                            break
+                        else:
+                            res_cal += n
+                print(res_cal)
 
                 print("press: ", res_cal)
                 ans = res_cal
@@ -108,10 +116,11 @@ entry = Entry(
     borderwidth=0,
    # border=0,
     width=11,
-    font=("Ariel 20")
-)
+    font=("Ariel 20"),
+    justify=RIGHT)
 #### POSITIONING ENTRY ####
 entry.index(INSERT)
+entry.insert(0, "0")
 entry.place(y=0, x=3)
 
 #### Buttons 1 to 9 ####
