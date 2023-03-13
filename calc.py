@@ -15,34 +15,32 @@ class Calculator:
         #self.__test = string.split(" ")
 
     def calculate(self, string=[]) -> float:
-        """Doese All the calculations necessary and return the results
-        this part loops through the operators and uses BODMAS format to do calculations"""
+        """Does all the calculations necessary and returns the result.
+        This part loops through the operators and uses BODMAS format to do calculations"""
         self.__test = string
         for e in self.__op:
-        # loops through op (operators)
+            # loops through op (operators)
             for j, f in enumerate(self.__test):
-            # loops through test (values to work on -- test)
+                # loops through test (values to work on -- test)
                 if e == f:
                     print(e, f)
-                    match f:
-                        case "/":
-                            self.__res = float(self.__test[j - 1]) / float(self.__test[j + 1])
-                            self.__removes(j)
-                        case "*":
-                            self.__res = float(self.__test[j - 1]) * float(self.__test[j + 1])
-                            self.__removes(j)
-                        case "+":
-                            self.__res = float(self.__test[j - 1]) + float(self.__test[j + 1])
-                            self.__removes(j)
-                        case "-":
-                            self.__res = float(self.__test[j - 1]) - float(self.__test[j + 1])
-                            self.__removes(j)
-                        case "%":
-                            self.__res = float(self.__test[j - 1]) % float(self.__test[j + 1])
-                            self.__removes(j)
+                    if f == "/":
+                        self.__res = float(self.__test[j - 1]) / float(self.__test[j + 1])
+                        self.__removes(j)
+                    elif f == "*":
+                        self.__res = float(self.__test[j - 1]) * float(self.__test[j + 1])
+                        self.__removes(j)
+                    elif f == "+":
+                        self.__res = float(self.__test[j - 1]) + float(self.__test[j + 1])
+                        self.__removes(j)
+                    elif f == "-":
+                        self.__res = float(self.__test[j - 1]) - float(self.__test[j + 1])
+                        self.__removes(j)
+                    elif f == "%":
+                        self.__res = float(self.__test[j - 1]) % float(self.__test[j + 1])
+                        self.__removes(j)
 
         return self.__res
-
 
     def __removes(self, j):
         """Deletes value used in test list and inserts final results"""

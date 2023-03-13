@@ -1,10 +1,12 @@
 from tkinter import *
 from calc import Calculator
+
 root = Tk()
 root.title("Simple Calculator")
 root.geometry("225x342")
 root.config(bg="light yellow")
-root.resizable(False,False)
+root.resizable(True, True)
+
 
 class CalculatorApp(Calculator):
     """ Graphical user unterface App """
@@ -14,6 +16,7 @@ class CalculatorApp(Calculator):
     operators = ["/", "*", "+", "-", "%"]
 
     def __init__(self) -> None:
+        super().__init__()
         self.ans_ret = CalculatorApp.ans_ret
 
     def checkExceptions(self, check_list: list):
@@ -23,10 +26,9 @@ class CalculatorApp(Calculator):
             return -1
         return 1
 
-
     def onclick_equal(self, text: str, ans):
         num = ""
-        #print(text)
+        # print(text)
         if len(text) == 1:
             if text in self.operators:
                 entry.delete(0, END)
@@ -55,107 +57,94 @@ class CalculatorApp(Calculator):
 
     def onclick(self, text):
         ans = ""
-        match text:
-            case "C":
-                entry.delete(0, END)
-            case "D":
-                entry.delete(entry.index(INSERT) - 1, END)
-            case "/":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "%":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "7":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "8":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "9":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "*":
-                entry.insert(entry.index(INSERT) + 1, text)
+        if text == "C":
+            entry.delete(0, END)
+        elif text == "D":
+            entry.delete(entry.index(INSERT) - 1, END)
+        elif text == "/":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "%":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "7":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "8":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "9":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "*":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "4":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "5":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "6":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "+":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "1":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "2":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "3":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "-":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "0":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == ".":
+            entry.insert(entry.index(INSERT) + 1, text)
+        elif text == "ans":
+            self.ans_ret = entry.get()
+            if self.ans_ret == "":
+                self.ans_ret = self.total_results
+            entry.delete(0, END)
+            entry.insert(entry.index(INSERT) + 1, "ans")
+        elif text == "=":
+            res = entry.get()
+            print("i am: ", self.ans_ret)
+            operation = self.onclick_equal(res, self.ans_ret)
+            print("Hello 1: ", operation)
+            # instance of calculator class
+            results = str(self.calculate(operation))
+            res_cal = ""
+            if results[-2:] == ".0":
+                for n in results:
+                    if n == ".":
+                        break
+                    else:
+                        res_cal += n
+            self.total_results = res_cal
+            print(res_cal)
 
-            case "4":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "5":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "6":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "+":
-                entry.insert(entry.index(INSERT) + 1, text)
+            print("press: ", res_cal)
+            ans = res_cal
+            print("Hello: ", ans)
 
-            case "1":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "2":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "3":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "-":
-                entry.insert(entry.index(INSERT) + 1, text)
-
-            case "0":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case ".":
-                entry.insert(entry.index(INSERT) + 1, text)
-            case "ans":
-                self.ans_ret = entry.get()
-                if self.ans_ret == "":
-                    self.ans_ret = self.total_results
-                entry.delete(0, END)
-                entry.insert(entry.index(INSERT) + 1, "ans")
-            case "=":
-
-                res = entry.get()
-                print("i am: ", self.ans_ret)
-
-
-                operation = self.onclick_equal(res, self.ans_ret)
-                print("Hello 1: ", operation)
-
-
-                # instance of calculator class
-                results = str(self.calculate(operation))
-                res_cal=""
-                if results[-2: ] == ".0":
-                    for n in results:
-                        if n == ".":
-                            break
-                        else:
-                            res_cal += n
-                self.total_results = res_cal
-                print(res_cal)
-
-                print("press: ", res_cal)
-                ans = res_cal
-                print("Hello: ", ans)
-
-                entry.delete(0, END)
-                entry.insert(0, res_cal)
+            entry.delete(0, END)
+            entry.insert(0, res_cal)
 
 
+# Creating an instance of CalculatorApp ####
+cal = CalculatorApp()
 
-
-
-#### Creating an instance of CalculatorApp ####
-cal =  CalculatorApp()
-
-#### Entry ####
+# Entry ####
 entry = Entry(
-   # bg="black",
-   # fg="White",
+    # bg="black",
+    # fg="White",
     borderwidth=0,
-   # border=0,
+    # border=0,
     width=11,
-    font=("Ariel 20"),
+    font="Ariel 20",
     justify=RIGHT)
-#### POSITIONING ENTRY ####
+# POSITIONING ENTRY ####
 entry.index(INSERT)
 entry.place(y=0, x=3)
 
 #### Buttons 1 to 9 ####
-bttn_c = Button(root, text="C", height=2, width=3, command= lambda: cal.onclick("C"))
-bttn_d = Button(root, text="D", height=2, width=3, command= lambda: cal.onclick("D"))
+bttn_c = Button(root, text="C", height=2, width=3, command=lambda: cal.onclick("C"))
+bttn_d = Button(root, text="D", height=2, width=3, command=lambda: cal.onclick("D"))
 bttn_div = Button(root, text="/", height=2, width=3, command=lambda: cal.onclick("/"))
 bttn_mod = Button(root, text="%", height=2, width=3, command=lambda: cal.onclick("%"))
-
 
 bttn_7 = Button(root, text="7", height=2, width=3, command=lambda: cal.onclick("7"))
 bttn_8 = Button(root, text="8", height=2, width=3, command=lambda: cal.onclick("8"))
