@@ -8,8 +8,16 @@ root.config(bg="light yellow")
 root.resizable(True, True)
 
 
+def checkExceptions(check_list: list):
+    """ Dealing with Errors  """
+    if check_list[0] == "" or check_list[-1] in "":
+        print("Hello")
+        return -1
+    return 1
+
+
 class CalculatorApp(Calculator):
-    """ Graphical user unterface App """
+    """ Graphical user interface App """
     ans_ret = ""
     total_results = "0"
 
@@ -18,13 +26,6 @@ class CalculatorApp(Calculator):
     def __init__(self) -> None:
         super().__init__()
         self.ans_ret = CalculatorApp.ans_ret
-
-    def checkExceptions(self, check_list: list):
-        """ Dealing with Errors  """
-        if check_list[0] == "" or check_list[-1] in "":
-            print("Hello")
-            return -1
-        return 1
 
     def onclick_equal(self, text: str, ans):
         num = ""
@@ -49,14 +50,14 @@ class CalculatorApp(Calculator):
                 num_l.remove("ans")
                 num_l.insert(i, ans)
 
-        if self.checkExceptions(num_l) < 0:
+        if checkExceptions(num_l) < 0:
             entry.delete(0, END)
             entry.insert(0, "Syntax Error")
         else:
             return num_l
 
     def onclick(self, text):
-        ans = ""
+        """"""
         if text == "C":
             entry.delete(0, END)
         elif text == "D":
@@ -136,13 +137,13 @@ entry = Entry(
     width=11,
     font="Ariel 20",
     justify=RIGHT)
-# POSITIONING ENTRY ####
+# POSITIONING ENTRY
 entry.index(INSERT)
 entry.place(y=0, x=3)
 
-#### Buttons 1 to 9 ####
-bttn_c = Button(root, text="C", height=2, width=3, command=lambda: cal.onclick("C"))
-bttn_d = Button(root, text="D", height=2, width=3, command=lambda: cal.onclick("D"))
+# Buttons 1 to 9
+button_c = Button(root, text="C", height=2, width=3, command=lambda: cal.onclick("C"))
+button_d = Button(root, text="D", height=2, width=3, command=lambda: cal.onclick("D"))
 bttn_div = Button(root, text="/", height=2, width=3, command=lambda: cal.onclick("/"))
 bttn_mod = Button(root, text="%", height=2, width=3, command=lambda: cal.onclick("%"))
 
@@ -166,9 +167,9 @@ bttn_dot = Button(root, text=".", height=2, width=3, command=lambda: cal.onclick
 bttn_ans = Button(root, text="ans", height=2, width=3, command=lambda: cal.onclick("ans"))
 bttn_equal = Button(root, text="=", height=2, width=3, command=lambda: cal.onclick("="))
 
-#### POSITIONING BUTTONS ####
-bttn_c.place(y=50, x=0)
-bttn_d.place(y=50, x=56)
+# POSITIONING BUTTONS
+button_c.place(y=50, x=0)
+button_d.place(y=50, x=56)
 bttn_div.place(y=50, x=112)
 bttn_mod.place(y=50, x=168)
 
